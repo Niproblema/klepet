@@ -1,0 +1,1 @@
+Študent z vpisno številko 63140001 potrjujem, da sem Jan Aleksandrov oddane domače naloge.
