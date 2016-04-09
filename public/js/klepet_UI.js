@@ -85,7 +85,20 @@ $(document).ready(function() {
     var novElement = divElementEnostavniTekst(sporocilo.besedilo);
     $('#sporocila').append(novElement);
   });
+<<<<<<< HEAD
 
+=======
+  
+  socket.on('dregljaj', function (dregljaj){
+    $('#vsebina').jrumble();
+    $('#vsebina').trigger('startRumble');
+    setTimeout(function(){
+      $('#vsebina').trigger('stopRumble');
+    }, 1500);
+    
+  });
+  
+>>>>>>> dregljaj
   socket.on('kanali', function(kanali) {
     $('#seznam-kanalov').empty();
 
