@@ -1,8 +1,8 @@
 function divElementEnostavniTekst(sporocilo) {
   var jeSmesko = sporocilo.indexOf('http://sandbox.lavbic.net/teaching/OIS/gradivo/') > -1;
   var jeTudSlika = sporocilo.indexOf('class="slika"') > -1;
-  if (jeSmesko || jeTudSlika) {
-   // sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;');
+  var jeVideo = sporocilo.indexOf('class="video"') > -1;
+  if (jeSmesko || jeTudSlika || jeVideo) {
     return $('<div style="font-weight: bold"></div>').html(sporocilo);
   }
   else {
@@ -18,6 +18,8 @@ function procesirajVnosUporabnika(klepetApp, socket) {
   var sporocilo = $('#poslji-sporocilo').val();
   sporocilo = dodajSmeske(sporocilo);
   sporocilo = dodajSliko(sporocilo);
+  sporocilo = dodajVideo(sporocilo);
+
   var sistemskoSporocilo;
 
   if (sporocilo.charAt(0) == '/') {
@@ -150,6 +152,17 @@ function dodajSliko(vhodnoBesedilo){
   for(var i = 0; i < besede.length; i++){
     if(besede[i].startsWith('http') && (besede[i].endsWith(".gif") || besede[i].endsWith("png") || besede[i].endsWith("jpg"))){
       vhodnoBesedilo = vhodnoBesedilo.concat('<img src="'+besede[i]+'" class="slika" >');
+    }
+  }
+  return vhodnoBesedilo;
+}
+
+function dodajVideo(vhodnoBesedilo){
+  var besede = vhodnoBesedilo.split(" ");
+  for(var i = 0; i < besede.length; i++){
+    if(besede[i].startsWith('https://www.youtube.com/watch?v=')){
+      besede[i] = besede[i].slice(0,24)+'embed/'+besede[i].slice(32);
+      vhodnoBesedilo = vhodnoBesedilo.concat('<iframe src="'+besede[i]+'" class="video" allowfullscreen></iframe>');
     }
   }
   return vhodnoBesedilo;
