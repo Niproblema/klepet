@@ -38,6 +38,10 @@ a {
   float: right;
   width: 15%;
 }
+.slika{
+  width: 200px;
+  margin-left: 20px;
+}
 
 #seznam-kanalov div {
   border-bottom: 1px solid #eee;
